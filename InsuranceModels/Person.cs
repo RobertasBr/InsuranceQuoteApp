@@ -10,7 +10,7 @@ namespace InsuranceModels
     //public class PersonService : IPersonservice
     //{
     //	public int GetRate()
-    //	{
+    //	{d
     //		//throw new NotImplementedException();
     //		return 0;
     //	}

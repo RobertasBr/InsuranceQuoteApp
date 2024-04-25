@@ -2,78 +2,58 @@
 
 namespace InsuranceModels
 {
-    //public interface IPersonservice
-    //{
-    //	int GetRate();
-
-    //}
-    //public class PersonService : IPersonservice
-    //{
-    //	public int GetRate()
-    //	{d
-    //		//throw new NotImplementedException();
-    //		return 0;
-    //	}
-    //}
-
     public class InsuranceService
     {
         public int Age { get; set; }
         public string Location { get; set; }
-        // Add more properties as required
+
         public interface IInsuranceService
         {
             int GetDiscount();
         }
+
         private readonly IInsuranceService _insuranceService;
+
         public InsuranceService(IInsuranceService insuranceService)
         {
             _insuranceService = insuranceService;
         }
-        // Assume CalculateQuote is a method that takes age and location and returns a quote
+
+        public InsuranceService()
+        {
+            // Initialize _insuranceService with a default implementation or null
+            // _insuranceService = new DefaultInsuranceService(); // if you have a default implementation
+        }
 
         public double CalculateQuote(int age, string location)
         {
-
-            // Your calculation logic here, can use properties as view linked directly to model
-
             double premium;
 
-            //a
             if (location == "rural")
-                //b
+            {
                 if ((age >= 18) && (age < 30))
                     premium = 5.0;
-                //c
-                else
-                    //c1
-                    if (age >= 31)
+                else if (age >= 31)
                     premium = 2.50;
-                //d
                 else
                     premium = 0.0;
-            //e
-            else
-            //f
-            if (location == "urban")
-                //g
+            }
+            else if (location == "urban")
+            {
                 if ((age >= 18) && (age <= 35))
                     premium = 6.0;
-                //h
-                else
-                //i
-                if (age >= 36)
+                else if (age >= 36)
                     premium = 5.0;
-
-                //j
                 else
                     premium = 0.0;
-            //k
+            }
             else
+            {
                 premium = 0.0;
+            }
 
-            double discount = _insuranceService.GetDiscount();
-            //l
+            double discount = _insuranceService?.GetDiscount() ?? 0;
+
             if (age >= 50)
                 premium *= 1 - (discount / 100);
 
@@ -81,4 +61,3 @@ namespace InsuranceModels
         }
     }
 }
-
